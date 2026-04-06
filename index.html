@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prizes TR — Key Kullan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --accent: #f5c542;
+      --accent2: #ff6b35;
+      --text: #e8e8f0;
+      --muted: #5a5a7a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 20%, rgba(245,197,66,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 300px at 80% 80%, rgba(255,107,53,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 480px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .logo-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 32px rgba(245,197,66,0.25);
+    }
+
+    .logo h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo p {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* Card */
+    .card {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeUp 0.6s ease 0.1s both;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card-title span {
+      color: var(--accent);
+    }
+
+    /* Input group */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .key-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 48px 14px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      letter-spacing: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]::placeholder {
+      letter-spacing: 1px;
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    .paste-btn {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 16px;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .paste-btn:hover { color: var(--accent); }
+
+    /* Submit button */
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a0a0f;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Result box */
+    .result {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .result.show { display: flex; }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .result-header::before {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .result-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .result-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .result-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 3px;
+    }
+
+    .result-value {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      border-color: #4caf50;
+      color: #4caf50;
+    }
+
+    /* Error / success messages */
+    .msg {
+      display: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .msg.error {
+      display: block;
+      background: rgba(255, 80, 80, 0.1);
+      border: 1px solid rgba(255,80,80,0.3);
+      color: #ff8080;
+    }
+
+    .msg.success {
+      display: block;
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76,175,80,0.3);
+      color: #81c784;
+    }
+
+    /* Warning */
+    .warning {
+      background: rgba(245,197,66,0.07);
+      border: 1px solid rgba(245,197,66,0.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: rgba(245,197,66,0.7);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(10,10,15,0.3);
+      border-top-color: #0a0a0f;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="container">
+
+    <div class="logo">
+      <div class="logo-icon">🎁</div>
+      <h1>Prizes TR</h1>
+      <p>Ödülünü almak için key'ini gir</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Key <span>Kullan</span></div>
+
+      <div class="input-group">
+        <label>Ödül Key'i</label>
+        <div class="key-input-wrap">
+          <input type="text" id="keyInput" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off" spellcheck="false"/>
+          <button class="paste-btn" onclick="pasteKey()" title="Yapıştır">📋</button>
+        </div>
+      </div>
+
+      <div id="msgBox" class="msg"></div>
+
+      <button class="btn" id="redeemBtn" onclick="redeemKey()">
+        Ödülü Al
+      </button>
+
+      <div class="result" id="resultBox">
+        <div class="result-header">Hesap Bilgileri</div>
+        <div class="result-item">
+          <div>
+            <div class="result-label">E-posta</div>
+            <div class="result-value" id="resEmail">—</div>
+          </div>
+          <button class="copy-btn" onclick="copyText('resEmail', this)">Kopyala</button>
+        </div>
+        <div class="result-item">
+          <div>
+            <div class="result-label">Şifre</div>
+            <div class="result-value" id="resPassword">—</div>
+          </div>
+          <button class="copy-btn" onclick="copyText('resPassword', this)">Kopyala</button>
+        </div>
+        <div class="result-item">
+          <div>
+            <div class="result-label">Tür</div>
+            <div class="result-value" id="resType">—</div>
+          </div>
+        </div>
+        <div class="warning">
+          ⚠️ Bu bilgileri kimseyle paylaşma. Şifreyi değiştirme. Key tek kullanımlıktır.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Prizes TR Discord → <a href="https://discord.gg/qprpDh3KM7" target="_blank">Sunucuya Katıl</a>
+    </div>
+
+  </div>
+
+  <script>
+    // ─── SUPABASE CONFIG (Vercel API'den çekilir) ──────
+    let SUPABASE_URL = null;
+    let SUPABASE_KEY = null;
+
+    async function loadConfig() {
+      const res = await fetch("/api/config");
+      const cfg = await res.json();
+      SUPABASE_URL = cfg.url;
+      SUPABASE_KEY = cfg.key;
+    }
+
+    window.addEventListener("DOMContentLoaded", loadConfig);
+    // ──────────────────────────────────────────────────
+
+    function formatKey(e) {
+      let v = e.target.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+      let parts = v.match(/.{1,4}/g) || [];
+      e.target.value = parts.join("-").slice(0, 19);
+    }
+
+    document.getElementById("keyInput").addEventListener("input", formatKey);
+
+    async function pasteKey() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById("keyInput").value = "";
+        document.getElementById("keyInput").value = text.toUpperCase().trim().slice(0, 19);
+        formatKey({ target: document.getElementById("keyInput") });
+      } catch {}
+    }
+
+    function showMsg(text, type) {
+      const box = document.getElementById("msgBox");
+      box.textContent = text;
+      box.className = "msg " + type;
+    }
+
+    function hideMsg() {
+      const box = document.getElementById("msgBox");
+      box.className = "msg";
+    }
+
+    async function redeemKey() {
+      const keyVal = document.getElementById("keyInput").value.trim();
+      const btn = document.getElementById("redeemBtn");
+      const result = document.getElementById("resultBox");
+
+      if (keyVal.length < 19) {
+        showMsg("❌ Geçersiz key formatı. 16 haneli key giriniz.", "error");
+        return;
+      }
+
+      hideMsg();
+      result.classList.remove("show");
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Kontrol ediliyor...';
+
+      try {
+        // 1) Key'i getir
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/keys?key=eq.${keyVal}&select=*`, {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json"
+          }
+        });
+
+        const data = await res.json();
+
+        if (!data || data.length === 0) {
+          showMsg("❌ Key bulunamadı. Kontrol edip tekrar dene.", "error");
+          return;
+        }
+
+        const row = data[0];
+
+        if (row.used) {
+          showMsg("❌ Bu key daha önce kullanılmış.", "error");
+          return;
+        }
+
+        // 2) Key'i kullanıldı olarak işaretle
+        await fetch(`${SUPABASE_URL}/rest/v1/keys?id=eq.${row.id}`, {
+          method: "PATCH",
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({ used: true, used_at: new Date().toISOString() })
+        });
+
+        // 3) Bilgileri göster
+        document.getElementById("resEmail").textContent = row.email;
+        document.getElementById("resPassword").textContent = row.password;
+        document.getElementById("resType").textContent = row.type || "Hesap";
+
+        result.classList.add("show");
+        showMsg("✅ Key başarıyla kullanıldı!", "success");
+
+      } catch (err) {
+        showMsg("❌ Bir hata oluştu. Tekrar dene.", "error");
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = "Ödülü Al";
+      }
+    }
+
+    function copyText(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "✓ Kopyalandı";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Kopyala";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
