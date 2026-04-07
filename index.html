@@ -349,6 +349,48 @@
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    .support-box {
+      background: rgba(255, 107, 53, 0.07);
+      border: 1px solid rgba(255, 107, 53, 0.25);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .support-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    .support-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .support-btn {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background: rgba(255, 107, 53, 0.15);
+      border: 1px solid rgba(255, 107, 53, 0.35);
+      border-radius: 10px;
+      color: var(--accent2);
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .support-btn:hover {
+      background: rgba(255, 107, 53, 0.25);
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
@@ -410,6 +452,11 @@
         </div>
         <div class="warning">
           ⚠️ Bu bilgileri kimseyle paylaşma. Şifreyi değiştirme. Key tek kullanımlıktır.
+        </div>
+        <div class="support-box">
+          <div class="support-title">⚠️ Sorun mu yaşıyorsun?</div>
+          <div class="support-desc">Hesaba kod gönderildiyse veya şifreyi kullanamıyorsan Discord üzerinden ticket aç ve sorunu belirt.</div>
+          <a class="support-btn" href="https://discord.gg/qprpDh3KM7" target="_blank">🎫 Discord'a Katıl &amp; Ticket Aç</a>
         </div>
       </div>
     </div>
