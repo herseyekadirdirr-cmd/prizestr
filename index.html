@@ -480,41 +480,83 @@
     .team-card {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 12px;
+      border-radius: 14px;
+      padding: 16px 13px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
     }
 
-    .team-name {
+    .team-card.real { border-color: rgba(255,255,255,0.12); }
+    .team-card.bayern { border-color: rgba(220,50,50,0.25); }
+
+    .team-badge { font-size: 22px; text-align: center; margin-bottom: 2px; }
+
+    .team-name-big {
       font-family: 'Syne', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       color: var(--text);
-      margin-bottom: 6px;
+      text-align: center;
+      margin-bottom: 2px;
     }
 
-    .lineup-label {
+    .formation-tag {
       font-size: 10px;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .section-label {
+      font-size: 9px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-top: 4px;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
     }
 
-    .player {
-      font-size: 12px;
-      color: var(--text);
-      padding: 3px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+    .player-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 3px;
     }
 
-    .player.sub {
+    .player-row .num {
+      font-size: 9px;
+      color: var(--accent);
+      font-weight: 700;
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .player-row .pname {
       font-size: 11px;
+      color: var(--text);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .player-row .pos {
+      font-size: 9px;
       color: var(--muted);
-      line-height: 1.7;
-      border: none;
+      background: rgba(255,255,255,0.06);
+      padding: 2px 5px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .subs-list {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      padding: 6px 0;
     }
 
     .ticket-btn {
@@ -617,43 +659,47 @@
 
       <!-- TAHMİN UYARISI -->
       <div class="predict-warning">
-        ⏱️ <strong>İlk yarıda tahmin yapılamaz.</strong> İkinci yarı başladıktan sonra aşağıdan ticket açarak tahmininizi iletin.
+        ⏱️ <strong>İkinci yarıdan sonra tahmin yapılamaz.</strong> Yalnızca ilk yarı boyunca ticket açarak tahmininizi iletebilirsiniz.
       </div>
 
       <!-- KADROLAR -->
       <div class="lineups">
-        <div class="team-card">
-          <div class="team-name">🤍 Real Madrid</div>
-          <div class="lineup-label">İlk 11</div>
-          <div class="player">13 · Lunin</div>
-          <div class="player">12 · Trent</div>
-          <div class="player">22 · Rüdiger</div>
-          <div class="player">24 · Huijsen</div>
-          <div class="player">18 · Carreras</div>
-          <div class="player">8 · Valverde</div>
-          <div class="player">14 · Tchouaméni</div>
-          <div class="player">45 · Thiago Pitarch</div>
-          <div class="player">15 · Arda Güler</div>
-          <div class="player">7 · Vini Jr.</div>
-          <div class="player">10 · Mbappé</div>
-          <div class="lineup-label" style="margin-top:10px;">Yedekler</div>
-          <div class="player sub">Fran González · Carvajal · Militão · Alaba · Bellingham · Camavinga · Gonzalo · Asencio · Ceballos · Fran García · Brahim · Mastantuono</div>
+        <div class="team-card real">
+          <div class="team-badge">🤍</div>
+          <div class="team-name-big">Real Madrid</div>
+          <div class="formation-tag">4-2-3-1</div>
+          <div class="section-label">İlk 11</div>
+          <div class="player-row"><span class="num">13</span><span class="pname">Lunin</span><span class="pos">KL</span></div>
+          <div class="player-row"><span class="num">12</span><span class="pname">Trent</span><span class="pos">SAÇ</span></div>
+          <div class="player-row"><span class="num">22</span><span class="pname">Rüdiger</span><span class="pos">STB</span></div>
+          <div class="player-row"><span class="num">24</span><span class="pname">Huijsen</span><span class="pos">STB</span></div>
+          <div class="player-row"><span class="num">18</span><span class="pname">Carreras</span><span class="pos">SOÇ</span></div>
+          <div class="player-row"><span class="num">14</span><span class="pname">Tchouaméni</span><span class="pos">DMF</span></div>
+          <div class="player-row"><span class="num">8</span><span class="pname">Valverde</span><span class="pos">OMF</span></div>
+          <div class="player-row"><span class="num">45</span><span class="pname">Thiago</span><span class="pos">OMF</span></div>
+          <div class="player-row"><span class="num">15</span><span class="pname">Arda Güler</span><span class="pos">OMF</span></div>
+          <div class="player-row"><span class="num">7</span><span class="pname">Vini Jr.</span><span class="pos">SOF</span></div>
+          <div class="player-row"><span class="num">10</span><span class="pname">Mbappé</span><span class="pos">SFW</span></div>
+          <div class="section-label" style="margin-top:10px;">Yedekler</div>
+          <div class="subs-list">Fran González • Carvajal • Militão • Alaba • Bellingham • Camavinga • Gonzalo • Asencio • Ceballos • Fran García • Brahim • Mastantuono</div>
         </div>
 
-        <div class="team-card">
-          <div class="team-name">🔴 Bayern München</div>
-          <div class="lineup-label">İlk 11</div>
-          <div class="player">1 · Neuer</div>
-          <div class="player">· Stanicic</div>
-          <div class="player">· Upamecano</div>
-          <div class="player">· Tah</div>
-          <div class="player">· Laimer</div>
-          <div class="player">· Kimmich</div>
-          <div class="player">· Pavlovic</div>
-          <div class="player">· Luis Díaz</div>
-          <div class="player">· Gnabry</div>
-          <div class="player">· Olise</div>
-          <div class="player">9 · Kane</div>
+        <div class="team-card bayern">
+          <div class="team-badge">🔴</div>
+          <div class="team-name-big">Bayern München</div>
+          <div class="formation-tag">4-2-3-1</div>
+          <div class="section-label">İlk 11</div>
+          <div class="player-row"><span class="num">1</span><span class="pname">Neuer</span><span class="pos">KL</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Stanicic</span><span class="pos">SAÇ</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Upamecano</span><span class="pos">STB</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Tah</span><span class="pos">STB</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Laimer</span><span class="pos">SOÇ</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Kimmich</span><span class="pos">DMF</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Pavlovic</span><span class="pos">DMF</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Luis Díaz</span><span class="pos">SOF</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Gnabry</span><span class="pos">OMF</span></div>
+          <div class="player-row"><span class="num"></span><span class="pname">Olise</span><span class="pos">SAF</span></div>
+          <div class="player-row"><span class="num">9</span><span class="pname">Kane</span><span class="pos">SFW</span></div>
         </div>
       </div>
 
