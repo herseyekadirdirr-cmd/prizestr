@@ -422,6 +422,8 @@
     .predict-panel {
       width: 100%;
       max-width: 480px;
+      box-sizing: border-box;
+      overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -474,7 +476,14 @@
     .lineups {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .team-card {
+      min-width: 0;
+      overflow: hidden;
     }
 
     .team-card {
@@ -541,6 +550,9 @@
       color: var(--text);
       font-weight: 500;
       flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .player-row .pos {
