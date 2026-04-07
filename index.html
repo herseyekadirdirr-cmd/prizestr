@@ -399,6 +399,140 @@
       from { opacity: 0; transform: translateY(-16px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ─── TAHMİN PANELİ ─────────────────────── */
+    .predict-btn {
+      width: 100%;
+      max-width: 480px;
+      padding: 15px;
+      background: linear-gradient(135deg, #1a6b2a, #27ae60);
+      border: none;
+      border-radius: 14px;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      position: relative;
+      z-index: 2;
+    }
+    .predict-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .predict-panel {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .predict-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .predict-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .predict-warning {
+      background: rgba(245,197,66,0.08);
+      border: 1px solid rgba(245,197,66,0.25);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: rgba(245,197,66,0.85);
+      line-height: 1.6;
+    }
+
+    .lineups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .team-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .team-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .lineup-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 4px;
+    }
+
+    .player {
+      font-size: 12px;
+      color: var(--text);
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .player.sub {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+      border: none;
+    }
+
+    .ticket-btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      background: linear-gradient(135deg, #1a6b2a, #27ae60);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .ticket-btn:hover { opacity: 0.9; }
+
   </style>
 </head>
 <body>
@@ -461,6 +595,74 @@
       </div>
     </div>
 
+    <!-- TAHMİNLER BUTONU -->
+    <button class="predict-btn" onclick="togglePredict()">
+      ⚽ Tahminler — Real Madrid vs Bayern
+    </button>
+
+    <!-- TAHMİN PANELİ -->
+    <div class="predict-panel" id="predictPanel" style="display:none;">
+      <div class="predict-title">🏆 UEFA Şampiyonlar Ligi — Çeyrek Final 1. Maç</div>
+      <div class="predict-subtitle">Real Madrid vs Bayern München • Santiago Bernabéu</div>
+
+      <!-- VİDEO -->
+      <div class="video-wrap">
+        <iframe
+          src="https://cdn.theoplayer.com/demos/iframe/theoplayer.html?autoplay=false&muted=false&preload=none&src=https://andro.5172948.xyz/checklist/androstreamlivetb.m3u8"
+          allowfullscreen
+          allow="autoplay"
+          frameborder="0"
+        ></iframe>
+      </div>
+
+      <!-- TAHMİN UYARISI -->
+      <div class="predict-warning">
+        ⏱️ <strong>İlk yarıda tahmin yapılamaz.</strong> İkinci yarı başladıktan sonra aşağıdan ticket açarak tahmininizi iletin.
+      </div>
+
+      <!-- KADROLAR -->
+      <div class="lineups">
+        <div class="team-card">
+          <div class="team-name">🤍 Real Madrid</div>
+          <div class="lineup-label">İlk 11</div>
+          <div class="player">13 · Lunin</div>
+          <div class="player">12 · Trent</div>
+          <div class="player">22 · Rüdiger</div>
+          <div class="player">24 · Huijsen</div>
+          <div class="player">18 · Carreras</div>
+          <div class="player">8 · Valverde</div>
+          <div class="player">14 · Tchouaméni</div>
+          <div class="player">45 · Thiago Pitarch</div>
+          <div class="player">15 · Arda Güler</div>
+          <div class="player">7 · Vini Jr.</div>
+          <div class="player">10 · Mbappé</div>
+          <div class="lineup-label" style="margin-top:10px;">Yedekler</div>
+          <div class="player sub">Fran González · Carvajal · Militão · Alaba · Bellingham · Camavinga · Gonzalo · Asencio · Ceballos · Fran García · Brahim · Mastantuono</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-name">🔴 Bayern München</div>
+          <div class="lineup-label">İlk 11</div>
+          <div class="player">1 · Neuer</div>
+          <div class="player">· Stanicic</div>
+          <div class="player">· Upamecano</div>
+          <div class="player">· Tah</div>
+          <div class="player">· Laimer</div>
+          <div class="player">· Kimmich</div>
+          <div class="player">· Pavlovic</div>
+          <div class="player">· Luis Díaz</div>
+          <div class="player">· Gnabry</div>
+          <div class="player">· Olise</div>
+          <div class="player">9 · Kane</div>
+        </div>
+      </div>
+
+      <!-- TAHMİN BUTONU -->
+      <a class="ticket-btn" href="https://discord.gg/qprpDh3KM7" target="_blank">
+        🎫 Discord'a Katıl &amp; Tahmin İçin Ticket Aç
+      </a>
+    </div>
+
     <div class="footer">
       Prizes TR Discord → <a href="https://discord.gg/qprpDh3KM7" target="_blank">Sunucuya Katıl</a>
     </div>
@@ -481,6 +683,12 @@
 
     window.addEventListener("DOMContentLoaded", loadConfig);
     // ──────────────────────────────────────────────────
+
+
+    function togglePredict() {
+      const panel = document.getElementById("predictPanel");
+      panel.style.display = panel.style.display === "none" ? "flex" : "none";
+    }
 
     function formatKey(e) {
       let v = e.target.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
